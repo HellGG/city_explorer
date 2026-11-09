@@ -1,6 +1,6 @@
 import DestinatieCard from './DestinatieCard.jsx'
 
-export default function ListaDestinatii({ destinatii, onToggle, onDelete }) {
+export default function ListaDestinatii({ destinatii, onToggle }) {
   if (destinatii.length === 0) {
     return <p className="info">Nu există nicio destinație.</p>
   }
@@ -12,7 +12,6 @@ export default function ListaDestinatii({ destinatii, onToggle, onDelete }) {
           key={destinatie.id}
           destinatie={destinatie}
           onToggle={onToggle}
-          onDelete={onDelete}
         />
       ))}
     </div>

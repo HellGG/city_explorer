@@ -38,3 +38,6 @@ export const adaugaDestinatie = (list, d) => [...list, d]
 
 // Lista fără destinația cu id-ul dat
 export const stergeDestinatie = (list, id) => list.filter((d) => d.id !== id)
+
+export const nr = (n, cuvant) =>
+  n % 100 >= 20 ? `${n} de ${cuvant}` : `${n} ${cuvant}`
