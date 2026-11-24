@@ -1,26 +1,29 @@
 # City Explorer
 
-Aplicație React pentru planificarea destinațiilor, cu date păstrate de `json-server`.
+Aplicație React pentru planificarea destinațiilor, cu backend Express și MariaDB.
 
 ## Pornire
 
-Într-un terminal, din acest director:
+1. Pornește MariaDB:
+
+```powershell
+cd server
+docker compose up -d
+```
+
+2. Instalează dependențele și pornește API-ul:
 
 ```powershell
 npm install
-npx json-server db.json --port 3001
-```
-
-Într-un al doilea terminal:
-
-```powershell
 npm run dev
 ```
 
-Deschide adresa Vite afișată în terminal. API-ul de test este disponibil la
-`http://localhost:3001/destinatii`.
+3. În alt terminal, pornește interfața:
 
-Aplicația încarcă destinațiile paginat (20 pe pagină), permite căutarea și
-marcarea destinațiilor vizitate, iar formularul validează datele înainte să le
-trimită serverului. `node genereaza.js` creează `db-mare.json` pentru exercițiul
-de performanță; acesta poate fi pornit separat cu `npx json-server db-mare.json --port 3002`.
+```powershell
+cd ..
+npm install
+npm run dev
+```
+
+API-ul este disponibil la `http://localhost:3000/api/destinatii`, iar aplicația la adresa afișată de Vite.

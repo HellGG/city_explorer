@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react'
+import { getStatistici } from '../api/statistici.js'
 
 export default function PanouStatistici() {
-  const [destinatii, setDestinatii] = useState([])
+  const [statistici, setStatistici] = useState({ destinatii: 0, zile: 0, medie: 0 })
   const [incarcare, setIncarcare] = useState(true)
   const [eroare, setEroare] = useState(null)
   const [prag, setPrag] = useState('3')
+  const [tara, setTara] = useState('')
 
   useEffect(() => {
     let active = true
 
     async function incarca() {
       try {
-        const response = await fetch('http://localhost:3001/destinatii')
-        if (!response.ok) {
-          throw new Error(`Serverul a răspuns cu ${response.status}`)
-        }
-
-        const date = await response.json()
-        if (active) setDestinatii(date)
+        const date = await getStatistici(prag, tara)
+        if (active) setStatistici(date)
       } catch (error) {
         if (active) setEroare(error.message)
       } finally {
@@ -29,7 +26,7 @@ export default function PanouStatistici() {
     return () => {
       active = false
     }
-  }, [])
+  }, [prag, tara])
 
   if (incarcare) {
     return <p className="stare">Se încarcă statisticile...</p>
@@ -38,10 +35,6 @@ export default function PanouStatistici() {
   if (eroare) {
     return <p className="stare eroare">Statistici indisponibile: {eroare}</p>
   }
-
-  const filtrate = destinatii.filter((destinatie) => destinatie.zile >= Number(prag))
-  const totalZile = filtrate.reduce((suma, destinatie) => suma + destinatie.zile, 0)
-  const medie = filtrate.length === 0 ? 0 : totalZile / filtrate.length
 
   return (
     <section className="panou">
@@ -55,14 +48,23 @@ export default function PanouStatistici() {
         />{' '}
         zile
       </label>
-      {filtrate.length === 0 && (
+      <label>
+        Țară{' '}
+        <input
+          type="text"
+          value={tara}
+          onChange={(event) => setTara(event.target.value)}
+          placeholder="Toate"
+        />
+      </label>
+      {statistici.destinatii === 0 && (
         <p className="gol">Nicio destinație cu cel puțin {prag} zile.</p>
       )}
-      {filtrate.length > 0 && (
+      {statistici.destinatii > 0 && (
         <ul>
-          <li>Destinații: {filtrate.length}</li>
-          <li>Total zile: {totalZile}</li>
-          <li>Media: {medie.toFixed(1)} zile</li>
+          <li>Destinații: {statistici.destinatii}</li>
+          <li>Total zile: {statistici.zile}</li>
+          <li>Media: {statistici.medie.toFixed(1)} zile</li>
         </ul>
       )}
     </section>

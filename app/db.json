@@ -59,20 +59,20 @@
       "oras": "Kyoto",
       "tara": "Japonia",
       "zile": 6,
-      "vizitat": false
+      "vizitat": true
     },
     {
       "id": "6",
       "oras": "Tokyo",
       "tara": "Japonia",
       "zile": 5,
-      "vizitat": false
+      "vizitat": true
     },
     {
       "oras": "Bucuresti",
       "tara": "Romania",
       "zile": 10,
-      "vizitat": false,
+      "vizitat": true,
       "id": "7ZUaN-Bt4Dc"
     }
   ],

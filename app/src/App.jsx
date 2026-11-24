@@ -5,6 +5,7 @@ import FormularDestinatie from './components/FormularDestinatie.jsx'
 import ListaDestinatii from './components/ListaDestinatii.jsx'
 import Rezumat from './components/Rezumat.jsx'
 import Cautare from './components/Cautare.jsx'
+import PanouStatistici from './components/PanouStatistici.jsx'
 import './App.css'
 
 export default function App() {
@@ -99,6 +100,7 @@ export default function App() {
             </p>
           )}
           <Cautare valoare={cautare} onChange={setCautare} />
+          <PanouStatistici />
           {destinatii.length === 0 ? (
             <p className="gol">Nu există nicio destinație. Adaugă una folosind formularul.</p>
           ) : afisate.length === 0 ? (

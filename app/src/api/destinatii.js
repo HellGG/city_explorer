@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001'
+const API_URL = 'http://localhost:3000/api'
 
 async function verificaRaspuns(response) {
   if (!response.ok) {
